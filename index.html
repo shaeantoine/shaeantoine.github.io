@@ -137,9 +137,10 @@
      ───────────────────────────────────────────────────────── */
   .cover { text-align: center; }
   .cover .section-content { display: flex; flex-direction: column; align-items: center; }
-  .cover-icon { width: 104px; height: 104px; margin-bottom: 32px; }
+  .cover-icon { width: 168px; height: 168px; margin-bottom: 44px; }
   .cover-icon svg { width: 100%; height: 100%; }
-  .cover .subhead { text-align: center; margin: 24px auto 0; }
+  .cover .headline-hero { font-size: clamp(76px, 12.5vw, 156px); letter-spacing: -0.045em; }
+  .cover .subhead { text-align: center; margin: 32px auto 0; font-size: clamp(24px, 2.6vw, 34px); max-width: 820px; }
   .cover-meta {
     position: absolute;
     left: 64px; right: 64px; bottom: 48px;
@@ -155,69 +156,109 @@
      ───────────────────────────────────────────────────────── */
   .institution-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-top: 56px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin: 48px auto 0;
+    max-width: 1000px;
   }
   .inst-tile {
-    aspect-ratio: 1.6;
-    padding: 24px 20px;
+    padding: 0;
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
     background: rgba(255,255,255,0.02);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     text-align: center;
     transition: border-color 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
     position: relative;
     overflow: hidden;
   }
   .inst-tile:hover { border-color: rgba(245,245,247,0.3); transform: translateY(-3px); }
+  .inst-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+  .inst-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(15%) brightness(0.92) contrast(1.05);
+  }
+  .inst-caption {
+    padding: 18px 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--border);
+    min-height: 92px;
+  }
   .inst-logo {
-    width: 56px;
     height: 56px;
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-strong);
   }
-  .inst-logo svg { width: 100%; height: 100%; }
-  .inst-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-  .inst-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-strong);
-    letter-spacing: 0.04em;
-    font-family: "Times New Roman", Georgia, serif;
+  .inst-logo svg { height: 100%; width: auto; }
+  .inst-logo img { height: 100%; width: auto; max-width: 180px; object-fit: contain; }
+  .section.visible .inst-tile { opacity: 1; }
+
+  /* Self-taught — full-size online-platform marks, the slide's hero */
+  .platform-hero {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+    align-items: center;
+    justify-items: center;
+    margin: 96px auto 0;
+    max-width: 1100px;
   }
-  .inst-detail {
-    font-size: 10px;
+  .platform-hero-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .platform-hero-item img {
+    max-width: 100%;
+    max-height: 144px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(1.1);
+  }
+
+  /* Optional screenshot placeholders — uncomment the HTML block to use */
+  .platform-screens {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin: 56px auto 0;
+    max-width: 1000px;
+  }
+  .platform-screen {
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.045));
+    position: relative;
+    overflow: hidden;
+  }
+  .platform-screen::after {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text-mute);
-    letter-spacing: 0.14em;
+    font-size: 11px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    margin-top: 4px;
     font-family: -apple-system, sans-serif;
   }
-  /* Strikethrough sweep on the tiles after they appear */
-  .inst-tile::after {
-    content: "";
-    position: absolute;
-    left: -8%;
-    right: -8%;
-    top: 50%;
-    height: 1px;
-    background: var(--c-pink);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 1s ease 1.4s;
-    opacity: 0.6;
-  }
-  .section.visible .inst-tile::after { transform: scaleX(1); }
-  .section.visible .inst-tile { opacity: 0.55; }
-  .section.visible .inst-tile:hover { opacity: 1; }
 
   /* ─────────────────────────────────────────────────────────
      Paradox — diverging lines visual
@@ -235,6 +276,48 @@
   .section.visible .paradox-line { animation: drawLine 2.4s cubic-bezier(.16,1,.3,1) forwards 0.5s; }
   @keyframes drawLine { to { stroke-dashoffset: 0; } }
   .section.visible .paradox-line.delayed { animation-delay: 1s; }
+
+  /* Boom (3A): online line draws in dramatically */
+  .paradox-chart--a .online-line {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+  }
+  .section.visible .paradox-chart--a .online-line {
+    animation: drawLine 2.4s cubic-bezier(.16,1,.3,1) forwards 0.5s;
+  }
+
+  /* Rescale (3B): online line is pre-drawn, the wrapper compresses
+     vertically anchored at y=200, while the universities curve draws
+     in towering above. The visual effect is the y-axis "rezooming" to
+     fit a much larger value. */
+  .paradox-chart--b .online-line-wrap,
+  .paradox-chart--b .online-label {
+    transform-box: view-box;
+    transform-origin: 0 200px;
+    transition: transform 1.4s cubic-bezier(.16,1,.3,1) 0.45s,
+                opacity 0.6s ease 0.45s;
+  }
+  .section.visible .paradox-chart--b .online-line-wrap {
+    transform: scaleY(0.4);
+  }
+  .section.visible .paradox-chart--b .online-label {
+    opacity: 0.45;
+  }
+  .paradox-chart--b .uni-line {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+  }
+  .section.visible .paradox-chart--b .uni-line {
+    animation: drawLine 2.4s cubic-bezier(.16,1,.3,1) forwards 1.3s;
+  }
+  .paradox-chart--b .uni-label {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .section.visible .paradox-chart--b .uni-label {
+    opacity: 1;
+    transition-delay: 2.7s;
+  }
 
   /* ─────────────────────────────────────────────────────────
      Killer line section — extra-large statement
@@ -440,10 +523,18 @@
     transform: translateY(20px);
     transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.4s ease;
   }
-  .section.visible .institution-row .inst-tile:nth-child(1) { opacity: 0.55; transform: translateY(0); transition-delay: 0.5s; }
-  .section.visible .institution-row .inst-tile:nth-child(2) { opacity: 0.55; transform: translateY(0); transition-delay: 0.65s; }
-  .section.visible .institution-row .inst-tile:nth-child(3) { opacity: 0.55; transform: translateY(0); transition-delay: 0.8s; }
-  .section.visible .institution-row .inst-tile:nth-child(4) { opacity: 0.55; transform: translateY(0); transition-delay: 0.95s; }
+  .section.visible .institution-row .inst-tile:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+  .section.visible .institution-row .inst-tile:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.65s; }
+  .section.visible .institution-row .inst-tile:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+
+  .platform-hero .platform-hero-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .section.visible .platform-hero .platform-hero-item:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.55s; }
+  .section.visible .platform-hero .platform-hero-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.75s; }
+  .section.visible .platform-hero .platform-hero-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.95s; }
 
   .signal-row .signal-chip {
     opacity: 0;
@@ -708,7 +799,12 @@
   @media (max-width: 900px) {
     .section { padding: 64px 28px; }
     .cover-meta { left: 28px; right: 28px; bottom: 28px; flex-direction: column; gap: 6px; }
-    .institution-row, .signal-row { grid-template-columns: repeat(2, 1fr); }
+    .institution-row { grid-template-columns: 1fr; gap: 18px; }
+    .signal-row { grid-template-columns: repeat(2, 1fr); }
+    .inst-photo { aspect-ratio: 16 / 10; }
+    .platform-hero { grid-template-columns: 1fr; gap: 56px; margin-top: 64px; }
+    .platform-hero-item img { max-height: 96px; }
+    .platform-screens { grid-template-columns: 1fr; gap: 16px; }
     .validator-row { grid-template-columns: repeat(2, 1fr); }
     .paradox-layout, .diptych { grid-template-columns: 1fr; }
     .nav { right: 12px; gap: 10px; }
@@ -782,72 +878,73 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════
-     2. PERSONAL CONTRADICTION  (0:00 – 0:30)
+     2A. SELF-TAUGHT  (online learning, age 10)
      ═══════════════════════════════════════════════════════════ -->
-<section class="section section--gray" data-section data-label="A Contradiction" data-notes="contradiction">
+<section class="section section--gray" data-section data-label="Self-taught" data-notes="self-taught">
   <div class="section-content stagger">
-    <h2 class="headline-large">By the time I was eighteen.</h2>
+    <h2 class="headline-large">From the time I was ten.</h2>
     <div class="slide-lines">
-      <p class="slide-line">I'd taken courses at <span class="em">Harvard. Georgetown. LSE. MIT.</span></p>
-      <p class="slide-line">Tutors. Online platforms. <span class="em">Years</span> of self-directed study.</p>
-      <p class="slide-line">Those experiences <span class="em">changed my life</span>. None changed my <span class="em">resume</span>.</p>
+      <p class="slide-line">Online platforms. <span class="em">Years</span> of self-directed study.</p>
     </div>
 
     <!--
-      INSTITUTION ROW
-      ============================================================
-      To swap in a real logo: replace the <svg> inside .inst-logo
-      with <img src="logos/harvard.svg" alt="Harvard">.
-      Tiles fade to 55% opacity and a hairline strikethrough sweeps
-      across them on reveal — visual echo of "none of it counted".
+      PLATFORM HERO ROW — three online-education marks, full-size.
+      To add YouTube / lecture screenshots later: drop images into
+      assets/, then uncomment the .platform-screens block below and
+      swap each <div class="platform-screen"> for an <img>.
     -->
+    <div class="platform-hero">
+      <div class="platform-hero-item"><img src="assets/mitx_logo.png" alt="MITx"></div>
+      <div class="platform-hero-item"><img src="assets/edx_logo.png" alt="edX"></div>
+      <div class="platform-hero-item"><img src="assets/coursera_logo.png" alt="Coursera"></div>
+    </div>
+
+    <!--
+    <div class="platform-screens">
+      <div class="platform-screen" data-label="YouTube lecture"></div>
+      <div class="platform-screen" data-label="Course module"></div>
+      <div class="platform-screen" data-label="Lecture notes"></div>
+    </div>
+    -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     2B. PERSONAL CONTRADICTION  (in-person at 16, then the punch)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section section--gray" data-section data-label="A Contradiction" data-notes="contradiction">
+  <div class="section-content stagger">
+    <h2 class="headline-large">By the time I was sixteen, I'd been to Harvard, MIT, and LSE.</h2>
+
     <div class="institution-row">
       <div class="inst-tile">
-        <div class="inst-logo">
-          <!-- Harvard: shield silhouette as placeholder -->
-          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M30 8 L48 14 L48 32 Q48 46 30 54 Q12 46 12 32 L12 14 Z"/>
-            <text x="30" y="34" text-anchor="middle" fill="currentColor" stroke="none" font-family="Times New Roman, serif" font-size="11" font-style="italic" font-weight="700">VE RI TAS</text>
-          </svg>
+        <div class="inst-photo">
+          <img src="assets/harvard_shae_pic.jpg" alt="Shae at Harvard">
         </div>
-        <div class="inst-name">Harvard</div>
-        <div class="inst-detail">Summer School</div>
+        <div class="inst-caption">
+          <div class="inst-logo"><img src="assets/harvard_logo.svg" alt="Harvard"></div>
+        </div>
       </div>
       <div class="inst-tile">
-        <div class="inst-logo">
-          <!-- Georgetown: G monogram placeholder -->
-          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="30" cy="30" r="22"/>
-            <text x="30" y="38" text-anchor="middle" fill="currentColor" stroke="none" font-family="Times New Roman, serif" font-size="26" font-weight="700">G</text>
-          </svg>
+        <div class="inst-photo">
+          <img src="assets/georgetown_shae_pic.jpg" alt="Shae studying">
         </div>
-        <div class="inst-name">Georgetown</div>
-        <div class="inst-detail">Summer School</div>
+        <div class="inst-caption">
+          <div class="inst-logo"><img src="assets/mit_logo.png" alt="MIT"></div>
+        </div>
       </div>
       <div class="inst-tile">
-        <div class="inst-logo">
-          <!-- LSE: stacked letterform placeholder -->
-          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="8" y="8" width="44" height="44" rx="2"/>
-            <text x="30" y="36" text-anchor="middle" fill="currentColor" stroke="none" font-family="Times New Roman, serif" font-size="14" font-weight="700">LSE</text>
-          </svg>
+        <div class="inst-photo">
+          <img src="assets/lse_shae_pic.jpg" alt="Shae at LSE">
         </div>
-        <div class="inst-name">LSE</div>
-        <div class="inst-detail">Summer School</div>
-      </div>
-      <div class="inst-tile">
-        <div class="inst-logo">
-          <!-- MIT: bar mark placeholder -->
-          <svg viewBox="0 0 60 60" fill="none">
-            <rect x="10" y="20" width="40" height="6" fill="currentColor"/>
-            <rect x="10" y="30" width="40" height="6" fill="currentColor"/>
-            <rect x="10" y="40" width="20" height="6" fill="currentColor"/>
-            <rect x="36" y="40" width="14" height="6" fill="currentColor"/>
-          </svg>
+        <div class="inst-caption">
+          <div class="inst-logo"><img src="assets/lse_log.png" alt="LSE"></div>
         </div>
-        <div class="inst-name">MIT</div>
-        <div class="inst-detail">MicroMasters</div>
       </div>
+    </div>
+
+    <div class="slide-lines">
+      <p class="slide-line">Those experiences <span class="em">changed my life</span>. None changed my <span class="em">resume</span>.</p>
     </div>
   </div>
 </section>
@@ -855,44 +952,98 @@
 <!-- ═══════════════════════════════════════════════════════════
      3. THE PARADOX  (0:30 – 1:00)
      ═══════════════════════════════════════════════════════════ -->
-<section class="section section--black" data-section data-label="The Paradox" data-notes="paradox">
+<!-- ═══════════════════════════════════════════════════════════
+     3A. THE BOOM  —  online education won
+     Chart shows online ed alone, growing dramatically.
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section section--black" data-section data-label="The Boom" data-notes="boom">
   <div class="section-content">
     <div class="paradox-layout">
       <div class="paradox-text stagger">
         <h2 class="headline-large">Online education won.</h2>
-        <h2 class="headline-large gradient-accent" style="margin-top:-8px;">Universities won harder.</h2>
         <div class="slide-lines">
-          <p class="slide-line">Stanford. Harvard. MIT — <span class="em">more valuable than ever</span>.</p>
-          <p class="slide-line">Education was never just <span class="em">education</span>.</p>
-          <p class="slide-line">It was <span class="em">trust</span>.</p>
+          <p class="slide-line">Coursera. edX. MITx. <span class="em">Free knowledge for all</span>.</p>
+          <p class="slide-line"><span class="em">Anyone</span> could learn <span class="em">anything</span>.</p>
         </div>
       </div>
       <div class="paradox-vis">
-        <svg viewBox="0 0 240 220" fill="none" aria-hidden="true">
-          <!-- axes -->
+        <svg viewBox="0 0 240 220" fill="none" aria-hidden="true" class="paradox-chart paradox-chart--a">
           <line x1="20" y1="200" x2="230" y2="200" stroke="#38383a" stroke-width="0.8"/>
           <line x1="20" y1="20" x2="20" y2="200" stroke="#38383a" stroke-width="0.8"/>
           <text x="20" y="216" fill="#6e6e73" font-size="9" font-family="-apple-system, sans-serif">2010</text>
           <text x="220" y="216" fill="#6e6e73" font-size="9" font-family="-apple-system, sans-serif" text-anchor="end">today</text>
           <text x="14" y="22" fill="#6e6e73" font-size="9" font-family="-apple-system, sans-serif" text-anchor="end">value</text>
 
-          <!-- Online learning curve -->
-          <path class="paradox-line" d="M 20 180 Q 80 170, 120 150 T 230 110"
-                stroke="#5ac8fa" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <text x="232" y="112" fill="#5ac8fa" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">online</text>
+          <g class="online-line-wrap">
+            <path class="online-line" d="M 20 190 Q 80 130, 130 70 T 230 25"
+                  stroke="#5ac8fa" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          </g>
+          <text class="online-label" x="232" y="27" fill="#5ac8fa" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">online ed</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <!-- Elite universities curve -->
-          <path class="paradox-line delayed" d="M 20 170 Q 70 160, 120 130 T 230 30"
-                stroke="url(#paraGrad)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+<!-- ═══════════════════════════════════════════════════════════
+     3B. THE RESCALE  —  universities won harder
+     Same chart, same starting state. On reveal: the online line's
+     wrapper compresses (scaleY 1 → 0.4 anchored at y=200), and the
+     universities curve draws in towering above.
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section section--black" data-section data-label="The Paradox" data-notes="paradox">
+  <div class="section-content">
+    <div class="paradox-layout">
+      <div class="paradox-text stagger">
+        <h2 class="headline-large">Universities won harder.</h2>
+        <div class="slide-lines">
+          <p class="slide-line"><span class="em">More expensive</span>. <span class="em">Harder</span> to get into.</p>
+          <p class="slide-line">Stanford. Harvard. MIT — <span class="em">more valuable than ever</span>.</p>
+        </div>
+      </div>
+      <div class="paradox-vis">
+        <svg viewBox="0 0 240 220" fill="none" aria-hidden="true" class="paradox-chart paradox-chart--b">
+          <line x1="20" y1="200" x2="230" y2="200" stroke="#38383a" stroke-width="0.8"/>
+          <line x1="20" y1="20" x2="20" y2="200" stroke="#38383a" stroke-width="0.8"/>
+          <text x="20" y="216" fill="#6e6e73" font-size="9" font-family="-apple-system, sans-serif">2010</text>
+          <text x="220" y="216" fill="#6e6e73" font-size="9" font-family="-apple-system, sans-serif" text-anchor="end">today</text>
+          <text x="14" y="22" fill="#6e6e73" font-size="9" font-family="-apple-system, sans-serif" text-anchor="end">value</text>
+
+          <!-- same online curve as slide A; gets visually compressed by the wrapper transform -->
+          <g class="online-line-wrap">
+            <path class="online-line" d="M 20 190 Q 80 130, 130 70 T 230 25"
+                  stroke="#5ac8fa" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          </g>
+          <text class="online-label" x="232" y="27" fill="#5ac8fa" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">online ed</text>
+
+          <!-- universities curve, draws in after the rescale settles -->
+          <g class="uni-line-wrap">
+            <path class="uni-line" d="M 20 175 Q 70 100, 120 50 T 230 12"
+                  stroke="url(#paraGradB)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          </g>
+          <text class="uni-label" x="232" y="14" fill="#ff9f0a" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">elite institutions</text>
+
           <defs>
-            <linearGradient id="paraGrad" x1="0" y1="200" x2="240" y2="0">
+            <linearGradient id="paraGradB" x1="0" y1="200" x2="240" y2="0">
               <stop offset="0" stop-color="#bf5af2"/>
               <stop offset="1" stop-color="#ff9f0a"/>
             </linearGradient>
           </defs>
-          <text x="232" y="32" fill="#ff9f0a" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">elite institutions</text>
         </svg>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     3C. THE CREDENTIAL  —  the real product was trust
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section section--black killer" data-section data-label="The Credential" data-notes="credential">
+  <div class="section-content stagger">
+    <h2 class="killer-headline">Education was never just instruction.</h2>
+    <h2 class="killer-punch gradient-accent">It was the credential.</h2>
+    <div class="slide-lines">
+      <p class="slide-line">And the credential is <span class="em">trust</span>.</p>
     </div>
   </div>
 </section>
@@ -1006,10 +1157,8 @@
 
 <!-- ═══════════════════════════════════════════════════════════
      6. TRACTION  (2:30 – 3:00)
-     TEMPORARILY HIDDEN — to restore: remove `hidden` attribute and
-     rename `data-section-hidden` back to `data-section`.
      ═══════════════════════════════════════════════════════════ -->
-<section class="section section--gray" data-section-hidden data-label="Traction" data-notes="traction" hidden>
+<section class="section section--gray" data-section data-label="Traction" data-notes="traction">
   <div class="section-content stagger">
     <h2 class="headline-large">The thesis is landing.</h2>
     <div class="slide-lines">
@@ -1177,23 +1326,51 @@
   'use strict';
 
   const speakerNotes = {
+    'self-taught': {
+      title: 'Self-taught — origin',
+      timing: '0:00 — 0:15',
+      notes: [
+        'From the time I was ten, I was teaching myself.',
+        '<span class="em-note">MITx. edX. Coursera.</span> YouTube lectures. Online courses became my real classroom.',
+        'I loved learning <span class="em-note">long before</span> anyone was grading it.'
+      ]
+    },
     contradiction: {
       title: 'Personal contradiction',
-      timing: '0:00 — 0:30',
+      timing: '0:15 — 0:30',
       notes: [
-        'By the time I was 18, I had taken courses from Harvard, MIT, Georgetown, LSE, private tutors, and online platforms.',
+        'By the time I was 16, I had taken courses in person at <span class="em-note">Harvard, MIT, and LSE</span> — alongside Georgetown, private tutors, and years of online study.',
         'Those experiences <span class="em-note">changed my life</span>.',
         'Yet when I applied for jobs, almost none of them mattered. <span class="em-note">That\'s when I realized something strange.</span>',
         '— Pause —'
       ]
     },
-    paradox: {
-      title: 'The Michael Smith paradox',
-      timing: '0:30 — 1:00',
+    boom: {
+      title: 'The boom — online education won',
+      timing: '0:30 — 0:45',
       notes: [
-        'We thought online education would disrupt universities.',
-        'Instead, universities became <span class="em-note">stronger than ever</span>. Stanford. Harvard. MIT — more valuable, not less.',
-        'Why? Because education was never just education. It was <span class="em-note">trust</span>.',
+        'In the last decade, online education exploded.',
+        'Coursera, edX, MITx — <span class="em-note">every great mind, free</span>.',
+        'Anyone with internet had access to <span class="em-note">everything</span>.'
+      ]
+    },
+    paradox: {
+      title: 'The paradox — universities won harder',
+      timing: '0:45 — 1:00',
+      notes: [
+        'And yet — universities became <span class="em-note">stronger than ever</span>.',
+        'Tuition went up. Acceptance rates dropped. Stanford, Harvard, MIT — <span class="em-note">more valuable, not less</span>.',
+        'The chart you saw was online education growing. Now look at how much bigger this curve is.',
+        '— Pause for the rescale —'
+      ]
+    },
+    credential: {
+      title: 'The credential — trust was the product',
+      timing: '1:00 — 1:15',
+      notes: [
+        'Why? Because education was never just <span class="em-note">instruction</span>.',
+        'It was the <span class="em-note">credential</span>.',
+        'And the credential is <span class="em-note">trust</span>. That\'s what universities sell.',
         'Now you have the room.'
       ]
     },
