@@ -57,7 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 80px 64px;
+    padding: 56px 64px 72px;
     overflow: hidden;
     z-index: 1;
   }
@@ -138,7 +138,8 @@
   .cover { text-align: center; }
   .cover .section-content { display: flex; flex-direction: column; align-items: center; }
   .cover-icon { width: 168px; height: 168px; margin-bottom: 44px; }
-  .cover-icon svg { width: 100%; height: 100%; }
+  .cover-icon svg,
+  .cover-icon img { width: 100%; height: 100%; object-fit: contain; }
   .cover .headline-hero { font-size: clamp(76px, 12.5vw, 156px); letter-spacing: -0.045em; }
   .cover .subhead { text-align: center; margin: 32px auto 0; font-size: clamp(24px, 2.6vw, 34px); max-width: 820px; }
   .cover-meta {
@@ -301,7 +302,8 @@
     transform: scaleY(0.4);
   }
   .section.visible .paradox-chart--b .online-label {
-    opacity: 0.45;
+    transform: translateY(105px);
+    opacity: 0.65;
   }
   .paradox-chart--b .uni-line {
     stroke-dasharray: 400;
@@ -318,6 +320,7 @@
     opacity: 1;
     transition-delay: 2.7s;
   }
+  .paradox-b-lines .slide-line { font-size: clamp(16px, 1.7vw, 22px); line-height: 1.3; }
 
   /* ─────────────────────────────────────────────────────────
      Killer line section — extra-large statement
@@ -339,6 +342,51 @@
     letter-spacing: -0.04em;
     line-height: 1.04;
     margin-bottom: 40px;
+  }
+
+  /* Insight slide — the "what we're building" reveal */
+  .insight-statement {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text-strong);
+    margin: 0 0 64px;
+    max-width: 1080px;
+  }
+  .insight-brand {
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-right: 0.18em;
+  }
+  .insight-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 920px;
+  }
+  .insight-line {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    align-items: baseline;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .insight-num {
+    font-family: -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--text-mute);
+  }
+  .insight-line p {
+    font-size: clamp(20px, 2.1vw, 28px);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--text);
+    margin: 0;
   }
   .signal-row {
     display: grid;
@@ -492,6 +540,30 @@
      ───────────────────────────────────────────────────────── */
   .closing { text-align: center; }
   .closing .section-content { display: flex; flex-direction: column; align-items: center; }
+  .closing-statement {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: clamp(34px, 4.4vw, 56px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: var(--text-strong);
+    margin: 0;
+    max-width: 1100px;
+  }
+  .closing-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 1.1s ease, transform 1.1s ease;
+  }
+  .closing-line--pivot { margin-top: 22px; font-weight: 600; }
+  .section.visible .closing-line:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+  .section.visible .closing-line:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.9s; }
+  .section.visible .closing-line:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 1.4s; }
+  .section.visible .closing-line:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 2.3s; }
+  .section.visible .closing-line:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 2.9s; }
   .closing-meta {
     margin-top: 56px;
     font-size: 14px;
@@ -551,43 +623,57 @@
      ───────────────────────────────────────────────────────── */
   .validator-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-    margin-top: 56px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 36px;
+    max-width: 1080px;
   }
   .validator-card {
-    padding: 26px 18px 20px;
+    padding: 0 0 22px;
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
     background: rgba(255,255,255,0.02);
     display: flex;
     flex-direction: column;
-    gap: 4px;
     transition: border-color 0.4s ease, transform 0.4s ease, background 0.4s ease;
     position: relative;
-    min-height: 168px;
+    overflow: hidden;
   }
   .validator-card:hover {
     border-color: rgba(48,209,88,0.45);
     transform: translateY(-3px);
     background: rgba(48,209,88,0.04);
   }
-  .validator-card::before {
+  .validator-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #0a0a0a;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .validator-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(12%) brightness(0.95) contrast(1.05);
+  }
+  .validator-photo::after {
     content: "";
     position: absolute;
-    top: 16px; left: 18px;
-    width: 6px; height: 6px;
+    top: 14px; right: 14px;
+    width: 8px; height: 8px;
     border-radius: 50%;
     background: var(--c-green);
-    box-shadow: 0 0 10px rgba(48,209,88,0.7);
+    box-shadow: 0 0 12px rgba(48,209,88,0.8);
   }
   .validator-name {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: var(--text-strong);
     letter-spacing: -0.01em;
-    margin-top: 14px;
     line-height: 1.25;
+    padding: 0 22px;
   }
   .validator-tag {
     font-size: 11px;
@@ -595,13 +681,15 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     font-weight: 600;
-    margin-top: 4px;
+    margin-top: 6px;
+    padding: 0 22px;
   }
   .validator-detail {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-mute-2);
-    line-height: 1.45;
-    margin-top: 8px;
+    line-height: 1.5;
+    margin-top: 10px;
+    padding: 0 22px;
   }
   .validator-row .validator-card {
     opacity: 0;
@@ -609,10 +697,8 @@
     transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.4s ease, background 0.4s ease;
   }
   .section.visible .validator-row .validator-card:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
-  .section.visible .validator-row .validator-card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.65s; }
-  .section.visible .validator-row .validator-card:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
-  .section.visible .validator-row .validator-card:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.95s; }
-  .section.visible .validator-row .validator-card:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 1.1s; }
+  .section.visible .validator-row .validator-card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.7s; }
+  .section.visible .validator-row .validator-card:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.9s; }
 
   /* ─────────────────────────────────────────────────────────
      Appendix — trust chart
@@ -805,7 +891,8 @@
     .platform-hero { grid-template-columns: 1fr; gap: 56px; margin-top: 64px; }
     .platform-hero-item img { max-height: 96px; }
     .platform-screens { grid-template-columns: 1fr; gap: 16px; }
-    .validator-row { grid-template-columns: repeat(2, 1fr); }
+    .validator-row { grid-template-columns: 1fr; gap: 18px; }
+    .validator-photo { aspect-ratio: 16 / 10; }
     .paradox-layout, .diptych { grid-template-columns: 1fr; }
     .nav { right: 12px; gap: 10px; }
     .notes-overlay { width: calc(100vw - 40px); right: 20px; }
@@ -882,9 +969,9 @@
      ═══════════════════════════════════════════════════════════ -->
 <section class="section section--gray" data-section data-label="Self-taught" data-notes="self-taught">
   <div class="section-content stagger">
-    <h2 class="headline-large">From the time I was ten.</h2>
-    <div class="slide-lines">
-      <p class="slide-line">Online platforms. <span class="em">Years</span> of self-directed study.</p>
+    <h2 class="headline-large">I fell in love with online education.</h2>
+    <div class="slide-lines" style="gap: 24px;">
+      <p class="slide-line"><span class="em">Years</span> of self-directed study.</p>
     </div>
 
     <!--
@@ -913,9 +1000,7 @@
      2B. PERSONAL CONTRADICTION  (in-person at 16, then the punch)
      ═══════════════════════════════════════════════════════════ -->
 <section class="section section--gray" data-section data-label="A Contradiction" data-notes="contradiction">
-  <div class="section-content stagger">
-    <h2 class="headline-large">By the time I was sixteen, I'd been to Harvard, MIT, and LSE.</h2>
-
+  <div class="section-content stagger" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
     <div class="institution-row">
       <div class="inst-tile">
         <div class="inst-photo">
@@ -943,7 +1028,7 @@
       </div>
     </div>
 
-    <div class="slide-lines">
+    <div class="slide-lines" style="margin-top: 40px;">
       <p class="slide-line">Those experiences <span class="em">changed my life</span>. None changed my <span class="em">resume</span>.</p>
     </div>
   </div>
@@ -960,10 +1045,10 @@
   <div class="section-content">
     <div class="paradox-layout">
       <div class="paradox-text stagger">
-        <h2 class="headline-large">Online education won.</h2>
-        <div class="slide-lines">
-          <p class="slide-line">Coursera. edX. MITx. <span class="em">Free knowledge for all</span>.</p>
-          <p class="slide-line"><span class="em">Anyone</span> could learn <span class="em">anything</span>.</p>
+        <h2 class="headline-large">Online education won</h2>
+        <div class="slide-lines" style="gap: 24px;">
+          <p class="slide-line"><span class="em">~400M learners</span> across Coursera and edX alone</p>
+          <p class="slide-line">World-class instruction at <span class="em">near-zero cost</span></p>
         </div>
       </div>
       <div class="paradox-vis">
@@ -975,13 +1060,14 @@
           <text x="14" y="22" fill="#6e6e73" font-size="9" font-family="-apple-system, sans-serif" text-anchor="end">value</text>
 
           <g class="online-line-wrap">
-            <path class="online-line" d="M 20 190 Q 80 130, 130 70 T 230 25"
+            <path class="online-line" d="M 20 190 Q 80 130, 130 70 T 230 22"
                   stroke="#5ac8fa" stroke-width="2.4" fill="none" stroke-linecap="round"/>
           </g>
-          <text class="online-label" x="232" y="27" fill="#5ac8fa" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">online ed</text>
+          <text class="online-label" x="232" y="30" fill="#5ac8fa" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">online ed</text>
         </svg>
       </div>
     </div>
+    <p class="chart-source">Sources: <a href="https://www.edx.org/resources/edx-reaches-100m-learners" target="_blank" rel="noopener">edX, &ldquo;100M learners reached&rdquo;</a>; <a href="https://investor.coursera.com/news/news-details/2026/Coursera-Reports-First-Quarter-2026-Financial-Results/default.aspx" target="_blank" rel="noopener">Coursera Q1 2026 financial results</a></p>
   </div>
 </section>
 
@@ -995,10 +1081,11 @@
   <div class="section-content">
     <div class="paradox-layout">
       <div class="paradox-text stagger">
-        <h2 class="headline-large">Universities won harder.</h2>
-        <div class="slide-lines">
-          <p class="slide-line"><span class="em">More expensive</span>. <span class="em">Harder</span> to get into.</p>
-          <p class="slide-line">Stanford. Harvard. MIT — <span class="em">more valuable than ever</span>.</p>
+        <h2 class="headline-large">Universities won harder</h2>
+        <div class="slide-lines paradox-b-lines" style="gap: 18px;">
+          <p class="slide-line"><span class="em">Harder to get in</span><br>Ivy League acceptance rates down ~50%</p>
+          <p class="slide-line"><span class="em">More costly to go</span><br>average US tuition has doubled in two decades</p>
+          <p class="slide-line"><span class="em">Stinking rich</span><br>US college endowments now near <span class="em">$1 trillion</span></p>
         </div>
       </div>
       <div class="paradox-vis">
@@ -1011,14 +1098,14 @@
 
           <!-- same online curve as slide A; gets visually compressed by the wrapper transform -->
           <g class="online-line-wrap">
-            <path class="online-line" d="M 20 190 Q 80 130, 130 70 T 230 25"
+            <path class="online-line" d="M 20 190 Q 80 130, 130 70 T 230 22"
                   stroke="#5ac8fa" stroke-width="2.4" fill="none" stroke-linecap="round"/>
           </g>
-          <text class="online-label" x="232" y="27" fill="#5ac8fa" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">online ed</text>
+          <text class="online-label" x="232" y="30" fill="#5ac8fa" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">online ed</text>
 
-          <!-- universities curve, draws in after the rescale settles -->
+          <!-- universities curve: original S-shape, kept lifting at the top (no taper) -->
           <g class="uni-line-wrap">
-            <path class="uni-line" d="M 20 175 Q 70 100, 120 50 T 230 12"
+            <path class="uni-line" d="M 20 175 Q 70 130, 120 80 T 230 10"
                   stroke="url(#paraGradB)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
           </g>
           <text class="uni-label" x="232" y="14" fill="#ff9f0a" font-size="10" font-family="-apple-system, sans-serif" font-weight="600">elite institutions</text>
@@ -1032,6 +1119,7 @@
         </svg>
       </div>
     </div>
+    <p class="chart-source">Sources: <a href="https://www.sparkadmissions.com/blog/ivy-league-acceptance-rates/" target="_blank" rel="noopener">Spark Admissions, Ivy League acceptance rates</a>; <a href="https://educationdata.org/average-cost-of-college-by-year" target="_blank" rel="noopener">Education Data Initiative, average cost of college by year</a>; <a href="https://nces.ed.gov/fastfacts/display.asp?id=73" target="_blank" rel="noopener">NCES, endowments of postsecondary institutions</a></p>
   </div>
 </section>
 
@@ -1040,11 +1128,21 @@
      ═══════════════════════════════════════════════════════════ -->
 <section class="section section--black killer" data-section data-label="The Credential" data-notes="credential">
   <div class="section-content stagger">
-    <h2 class="killer-headline">Education was never just instruction.</h2>
-    <h2 class="killer-punch gradient-accent">It was the credential.</h2>
-    <div class="slide-lines">
-      <p class="slide-line">And the credential is <span class="em">trust</span>.</p>
-    </div>
+    <h2 class="killer-headline">The most valuable thing a university produces</h2>
+    <h2 class="killer-headline" style="margin-top: 8px;">isn't knowledge.</h2>
+    <h2 class="killer-punch gradient-accent">It's confidence.</h2>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     3D. THE QUESTION  —  bridge from "they sell confidence" to
+     "we can produce it differently". Threads "confidence" forward
+     and primes slide 4 by introducing "how you learn" lexically.
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section section--black killer" data-section data-label="The Question" data-notes="question">
+  <div class="section-content stagger">
+    <h2 class="killer-headline">What if confidence could come from <span class="gradient-accent">how</span> you learn,</h2>
+    <h2 class="killer-headline" style="margin-top: 8px;">not <span class="gradient-accent">where</span>?</h2>
   </div>
 </section>
 
@@ -1053,105 +1151,36 @@
      ═══════════════════════════════════════════════════════════ -->
 <section class="section section--gray killer" data-section data-label="The Insight" data-notes="insight">
   <div class="section-content stagger">
-    <h2 class="killer-headline">The problem isn't delivering knowledge.</h2>
-    <h2 class="killer-punch gradient-accent">It's making capability legible.</h2>
-    <div class="slide-lines">
-      <p class="slide-line">Credentials are <span class="em">compressed summaries</span> of learning.</p>
-      <p class="slide-line">AI lets us observe the <span class="em">learning itself</span>.</p>
-    </div>
-    <div class="signal-row">
-      <div class="signal-chip">
-        <div class="signal-chip-name">Curiosity</div>
-        <div class="signal-chip-desc">what they pursue</div>
+    <p class="insight-statement">
+      <span class="insight-brand gradient-accent">H4</span> turns how a person learns into <span class="em">confidence</span> in what they can do.
+    </p>
+    <div class="insight-lines">
+      <div class="insight-line">
+        <span class="insight-num">01</span>
+        <p>A living model of how a person learns, and what they could become.</p>
       </div>
-      <div class="signal-chip">
-        <div class="signal-chip-name">Adaptation</div>
-        <div class="signal-chip-desc">how they recover</div>
+      <div class="insight-line">
+        <span class="insight-num">02</span>
+        <p>Capability read from process, not measured from outputs.</p>
       </div>
-      <div class="signal-chip">
-        <div class="signal-chip-name">Velocity</div>
-        <div class="signal-chip-desc">how fast they grow</div>
-      </div>
-      <div class="signal-chip">
-        <div class="signal-chip-name">Transfer</div>
-        <div class="signal-chip-desc">how far it carries</div>
+      <div class="insight-line">
+        <span class="insight-num">03</span>
+        <p>Infrastructure that converts learning activity into verifiable confidence.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════
-     5. SAME SCORE. DIFFERENT LEARNERS.  (1:30 – 2:30)
+     5. LIVE DEMO  (1:30 – 2:30)
+     Placeholder slide while the live demo runs. Old diptych content
+     (Student A / Student B comparison + verdict) is in git history if
+     ever needed as a fallback.
      ═══════════════════════════════════════════════════════════ -->
-<section class="section section--black" data-section data-label="The Demo" data-notes="demo">
-  <div class="section-content stagger">
-    <h2 class="headline-large">Same score. Different learners.</h2>
-    <div class="slide-lines">
-      <p class="slide-line">Two students. <span class="em">Same problem. Same final answer.</span></p>
-      <p class="slide-line">One reaches it through <span class="em">analogy</span>. The other through <span class="em">repetition</span>.</p>
-    </div>
-
-    <div class="diptych">
-      <!-- Student A -->
-      <div class="diptych-pane left">
-        <div class="diptych-label">Student A</div>
-        <div class="diptych-name">Reasons by analogy.</div>
-        <div class="diptych-trajectory">
-          <svg viewBox="0 0 220 110" fill="none" aria-hidden="true">
-            <line x1="10" y1="100" x2="210" y2="100" stroke="#38383a" stroke-width="0.5"/>
-            <path class="traj-path" d="M 10 95 Q 30 60, 60 70 T 110 50 Q 140 35, 170 25 T 210 18"
-                  stroke="url(#trajA)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-            <defs>
-              <linearGradient id="trajA" x1="0" y1="100" x2="220" y2="0">
-                <stop offset="0" stop-color="#2997ff"/>
-                <stop offset="1" stop-color="#5ac8fa"/>
-              </linearGradient>
-            </defs>
-            <circle cx="210" cy="18" r="3" fill="#5ac8fa"/>
-          </svg>
-        </div>
-        <ul class="diptych-traits">
-          <li><span class="trait-name">Rapid abstraction</span><span class="trait-strength">High</span></li>
-          <li><span class="trait-name">Strong transfer</span><span class="trait-strength">High</span></li>
-          <li><span class="trait-name">High curiosity</span><span class="trait-strength">High</span></li>
-          <li><span class="trait-name">Moderate persistence</span><span class="trait-strength">Med</span></li>
-        </ul>
-        <span class="diptych-tag">Capability View</span>
-      </div>
-
-      <!-- Student B -->
-      <div class="diptych-pane right">
-        <div class="diptych-label">Student B</div>
-        <div class="diptych-name">Builds through repetition.</div>
-        <div class="diptych-trajectory">
-          <svg viewBox="0 0 220 110" fill="none" aria-hidden="true">
-            <line x1="10" y1="100" x2="210" y2="100" stroke="#38383a" stroke-width="0.5"/>
-            <path class="traj-path" d="M 10 95 L 30 80 L 38 88 L 60 70 L 70 78 L 95 60 L 110 66 L 140 45 L 155 50 L 180 30 L 195 34 L 210 18"
-                  stroke="url(#trajB)" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <defs>
-              <linearGradient id="trajB" x1="0" y1="100" x2="220" y2="0">
-                <stop offset="0" stop-color="#bf5af2"/>
-                <stop offset="1" stop-color="#ff375f"/>
-              </linearGradient>
-            </defs>
-            <circle cx="210" cy="18" r="3" fill="#bf5af2"/>
-          </svg>
-        </div>
-        <ul class="diptych-traits">
-          <li><span class="trait-name">Steady persistence</span><span class="trait-strength">High</span></li>
-          <li><span class="trait-name">Strong recall</span><span class="trait-strength">High</span></li>
-          <li><span class="trait-name">Methodical pace</span><span class="trait-strength">Med</span></li>
-          <li><span class="trait-name">Lower transfer</span><span class="trait-strength">Low</span></li>
-        </ul>
-        <span class="diptych-tag">Capability View</span>
-      </div>
-    </div>
-
-    <div class="verdict">
-      Both score <span class="em">8 out of 10</span>.
-      <span class="verdict-sep"></span>
-      Traditional education says they're identical. <span class="em">We don't.</span>
-    </div>
+<section class="section section--black" data-section data-label="Live Demo" data-notes="demo">
+  <div class="section-content stagger" style="text-align: center; align-items: center;">
+    <div class="appendix-eyebrow">Live Demo</div>
+    <h2 class="headline-hero gradient-accent">Let me show you.</h2>
   </div>
 </section>
 
@@ -1162,35 +1191,33 @@
   <div class="section-content stagger">
     <h2 class="headline-large">The thesis is landing.</h2>
     <div class="slide-lines">
-      <p class="slide-line">No users. No revenue. <span class="em">Not yet.</span></p>
-      <p class="slide-line">But the people who'd know if this is real are <span class="em">already engaged</span>.</p>
+      <p class="slide-line">The people who'd know if this is real are <span class="em">already engaged</span>.</p>
     </div>
 
     <div class="validator-row">
       <div class="validator-card">
-        <div class="validator-name">Sendhil Mullainathan</div>
-        <div class="validator-tag">MIT</div>
-        <div class="validator-detail">Behavioral economics &amp; machine learning</div>
-      </div>
-      <div class="validator-card">
+        <div class="validator-photo">
+          <img src="assets/michael_smith.png" alt="Michael Smith" style="object-position: center 25%;">
+        </div>
         <div class="validator-name">Michael Smith</div>
-        <div class="validator-tag">Carnegie Mellon</div>
-        <div class="validator-detail">Information systems &amp; digital markets</div>
+        <div class="validator-tag">Professor, Carnegie Mellon</div>
+        <div class="validator-detail">Head of the Initiative for Teaching &amp; Education Analytics (iTEA)</div>
       </div>
       <div class="validator-card">
-        <div class="validator-name">CHRO, IMC Trading</div>
-        <div class="validator-tag">Industry</div>
-        <div class="validator-detail">Hiring quant talent where capability matters more than the credential</div>
+        <div class="validator-photo">
+          <img src="assets/clemence_jacqueri.png" alt="Clemence Jacqueri">
+        </div>
+        <div class="validator-name">Clemence Jacqueri</div>
+        <div class="validator-tag">CPO, IMC Trading</div>
+        <div class="validator-detail">Hires and evaluates elite quant talent</div>
       </div>
       <div class="validator-card">
-        <div class="validator-name">Lecturer, USYD</div>
-        <div class="validator-tag">Higher Ed</div>
-        <div class="validator-detail">Inside the credentialing institution</div>
-      </div>
-      <div class="validator-card">
-        <div class="validator-name">Forbes 30 Under 30 Founder</div>
-        <div class="validator-tag">EdTech</div>
-        <div class="validator-detail">Operator perspective on the education market</div>
+        <div class="validator-photo">
+          <img src="assets/phoebe_britten.png" alt="Phoebe Britten" style="object-position: center 25%;">
+        </div>
+        <div class="validator-name">Phoebe Britten</div>
+        <div class="validator-tag">Founder, ITE</div>
+        <div class="validator-detail">Forbes 30 Under 30 through an education not-for-profit</div>
       </div>
     </div>
   </div>
@@ -1201,29 +1228,10 @@
      ═══════════════════════════════════════════════════════════ -->
 <section class="section section--black killer" data-section data-label="Next Steps" data-notes="next-steps">
   <div class="section-content stagger">
-    <h2 class="killer-headline">The hard part isn't building it.</h2>
-    <h2 class="killer-punch gradient-accent">It's earning the right to be trusted.</h2>
+    <h2 class="killer-headline">The first <span class="gradient-accent">thousand portraits.</span></h2>
     <div class="slide-lines">
-      <p class="slide-line">Almost anyone can ship a study tool. <span class="em">Almost no one is trusted to judge.</span></p>
-      <p class="slide-line">The next <span class="em">3–6 months</span> treat trust as the design constraint.</p>
-    </div>
-    <div class="signal-row">
-      <div class="signal-chip">
-        <div class="signal-chip-name">Co-publish</div>
-        <div class="signal-chip-desc">working paper with named academics</div>
-      </div>
-      <div class="signal-chip">
-        <div class="signal-chip-name">Pilot in public</div>
-        <div class="signal-chip-desc">one institution, one cohort, open results</div>
-      </div>
-      <div class="signal-chip">
-        <div class="signal-chip-name">Open the method</div>
-        <div class="signal-chip-desc">capability framework, scrutable</div>
-      </div>
-      <div class="signal-chip">
-        <div class="signal-chip-name">Independent rater</div>
-        <div class="signal-chip-desc">third party verifies our signals</div>
-      </div>
+      <p class="slide-line">One cohort. The <span class="em">deepest read of human capability</span> ever produced.</p>
+      <p class="slide-line">Every conversation we have makes the next one sharper.<br><span class="em">The advantage compounds.</span></p>
     </div>
   </div>
 </section>
@@ -1233,9 +1241,13 @@
      ═══════════════════════════════════════════════════════════ -->
 <section class="section section--black closing" data-section data-label="Close">
   <div class="section-content stagger">
-    <h2 class="headline-hero"><span class="gradient-accent">Not by measuring<br>what people know.</span></h2>
-    <h2 class="headline-hero" style="color: var(--text-strong); margin-top: 16px;">By understanding<br>how they learn.</h2>
-    <p class="subhead">Universities became powerful as trusted capability filters. AI can create a new one.</p>
+    <h2 class="closing-statement">
+      <span class="closing-line">For thousands of years,</span>
+      <span class="closing-line">society has searched for a way</span>
+      <span class="closing-line">to identify human potential.</span>
+      <span class="closing-line closing-line--pivot">This <span class="gradient-accent">may</span> be the first time</span>
+      <span class="closing-line">we've had the tools to truly try.</span>
+    </h2>
     <div class="closing-meta">
       <span>Shae McKenna · 2026</span>
     </div>
@@ -1330,9 +1342,9 @@
       title: 'Self-taught — origin',
       timing: '0:00 — 0:15',
       notes: [
-        'From the time I was ten, I was teaching myself.',
+        'I fell in love with online education.',
         '<span class="em-note">MITx. edX. Coursera.</span> YouTube lectures. Online courses became my real classroom.',
-        'I loved learning <span class="em-note">long before</span> anyone was grading it.'
+        'Years of self-directed study — long before anyone was grading it.'
       ]
     },
     contradiction: {
@@ -1350,8 +1362,8 @@
       timing: '0:30 — 0:45',
       notes: [
         'In the last decade, online education exploded.',
-        'Coursera, edX, MITx — <span class="em-note">every great mind, free</span>.',
-        'Anyone with internet had access to <span class="em-note">everything</span>.'
+        'Coursera and edX alone have <span class="em-note">~400 million learners</span> combined — edX crossed 100M, Coursera reported ~300M+ in its 2026 Q1 results.',
+        'World-class instruction at <span class="em-note">near-zero cost</span>. MIT, Stanford, and Harvard courses — free to anyone with internet.'
       ]
     },
     paradox: {
@@ -1359,62 +1371,73 @@
       timing: '0:45 — 1:00',
       notes: [
         'And yet — universities became <span class="em-note">stronger than ever</span>.',
-        'Tuition went up. Acceptance rates dropped. Stanford, Harvard, MIT — <span class="em-note">more valuable, not less</span>.',
+        '<span class="em-note">Harder to get in</span>: Ivy League acceptance rates have dropped roughly 50% over the past two decades.',
+        '<span class="em-note">More costly to go</span>: the average cost of college has doubled in 20 years.',
+        '<span class="em-note">Stinking rich</span>: US college endowments grew to nearly $1 trillion by 2021.',
         'The chart you saw was online education growing. Now look at how much bigger this curve is.',
         '— Pause for the rescale —'
       ]
     },
     credential: {
-      title: 'The credential — trust was the product',
+      title: 'The credential — confidence was the product',
       timing: '1:00 — 1:15',
       notes: [
-        'Why? Because education was never just <span class="em-note">instruction</span>.',
-        'It was the <span class="em-note">credential</span>.',
-        'And the credential is <span class="em-note">trust</span>. That\'s what universities sell.',
-        'Now you have the room.'
+        'The most valuable thing a university produces isn\'t knowledge — it\'s <span class="em-note">confidence</span>.',
+        'Confidence the student has in themselves. Confidence employers have in the student. Confidence the market has in the institution, which gets bestowed at graduation.',
+        'That\'s the product. That\'s what people are actually paying for.',
+        'Set up the callback: <span class="em-note">"hold this word — we\'ll come back to it"</span>.',
+        '— Now you have the room —'
+      ]
+    },
+    question: {
+      title: 'The question — confidence from where?',
+      timing: '1:15 — 1:30',
+      notes: [
+        'Pause. Let the previous beat land.',
+        'Then: <span class="em-note">what if confidence could come from how you learn — not where?</span>',
+        'Don\'t answer it. Let the room sit with it for a beat.',
+        'The next slide answers it.'
       ]
     },
     insight: {
-      title: 'The insight',
-      timing: '1:00 — 1:30',
+      title: 'The insight — what H4 is',
+      timing: '1:30 — 2:00',
       notes: [
-        'Today we measure capability using credentials.',
-        'But credentials are <span class="em-note">compressed summaries</span> of learning.',
-        'AI allows us to observe <span class="em-note">learning itself</span>.',
-        'Curiosity. Adaptation. Velocity. Transfer. Not features — <span class="em-note">evidence</span>.'
+        'Reintroduce the name. <span class="em-note">H4</span> turns how a person learns into confidence in what they can do.',
+        '<span class="em-note">One:</span> a living model of how a person learns, and what they could become — not a snapshot, a trajectory.',
+        '<span class="em-note">Two:</span> capability read from process, not measured from outputs — we watch how you think, not just what you answer.',
+        '<span class="em-note">Three:</span> infrastructure that converts learning activity into verifiable confidence — the same product universities sell, produced differently.',
+        'Hold the bold version if pressed: <span class="em-note">a richer signal of interests, skills, and abilities than any institution — traditional or digital — can produce.</span>',
+        '— Set up the demo —'
       ]
     },
     demo: {
-      title: 'Same score. Different learners.',
+      title: 'Live demo',
       timing: '1:30 — 2:30',
       notes: [
-        'This is the heart. The demo answers one question: <span class="em-note">can we learn something meaningful about a person from how they learn?</span>',
-        'Show Student A. Show Student B. Same problem. Same final score.',
-        'But the trajectories are different. One reaches the answer through <span class="em-note">analogy and rapid abstraction</span>. The other through <span class="em-note">methodical repetition</span>.',
-        '<span class="em-note">Traditional education says these students are identical. Our system doesn\'t.</span>',
-        'That is the magical moment.'
+        'Switch to the demo. Read a student in real time — surface interests, skills, and the trajectory of their work.',
+        'Land the point: a transcript would call this student a single number. <span class="em-note">We see the person.</span>'
       ]
     },
     traction: {
       title: 'Traction — the right rooms',
       timing: '2:30 — 3:00',
       notes: [
-        'Be honest up front: <span class="em-note">no users yet. No revenue yet.</span> That isn\'t the proof point at this stage.',
-        'The proof point is who is already in the conversation.',
-        '<span class="em-note">Sendhil Mullainathan at MIT</span> and <span class="em-note">Michael Smith at Carnegie Mellon</span> — two of the people thinking hardest about how AI changes capability assessment.',
-        'On the demand side: the <span class="em-note">CHRO of IMC Trading</span>, where capability matters more than credentials. A <span class="em-note">USYD lecturer</span>, inside the credentialing institution. A <span class="em-note">Forbes 30 Under 30 education founder</span>.',
-        'The thesis lands across academics, employers, and operators — three rooms that rarely agree on anything.'
+        'The thesis is landing — the people who\'d know if this is real are already engaged.',
+        '<span class="em-note">Michael Smith, Professor at Carnegie Mellon</span> — head of the Initiative for Teaching &amp; Education Analytics (iTEA). One of the people thinking hardest about how AI changes capability assessment.',
+        '<span class="em-note">Clemence Jacqueri, CPO at IMC Trading</span> — hires and evaluates elite quant talent.',
+        '<span class="em-note">Phoebe Britten, Founder of ITE</span> — Forbes 30 Under 30 through an education not-for-profit.',
+        'Three rooms that rarely agree on anything: academia, industry, operators. The thesis lands in all three.'
       ]
     },
     'next-steps': {
       title: 'Next steps — trust as architecture',
       timing: '3:00 — 3:45',
       notes: [
-        'Here\'s the part most pitches get wrong. They treat trust as marketing — something you bolt on once the product works.',
-        '<span class="em-note">The core problem here isn\'t technical.</span> Almost anyone can build a platform that helps someone study. The hard, valuable thing is being trusted to judge.',
-        'So the next 3–6 months put trust at the center of development, not the perimeter.',
-        'Four moves. <span class="em-note">Co-publish</span> a working paper with the academics already engaged — credentialed authorship is social proof. <span class="em-note">Pilot in public</span> with one institution, one cohort, open results — converts conversation into evidence. <span class="em-note">Open the method</span> — universities are trusted because their methods are scrutinized; we have to invite the same scrutiny. <span class="em-note">Bring in an independent rater</span> — a third party reproducing our signals beats any internal benchmark.',
-        'Universities became powerful as audited capability filters. We have to be auditable too.'
+        'This is where we\'re going. <span class="em-note">The first thousand portraits.</span>',
+        'One cohort. Not a pilot, not a study — the deepest read of human capability ever produced. Nobody has ever watched a thousand people learn at this resolution.',
+        'And here\'s the moat: every conversation we have makes the next one sharper. <span class="em-note">The advantage compounds.</span> Universities can\'t catch up — they don\'t have the substrate.',
+        'If pressed on the operational steps: co-publishing with iTEA, piloting with one institution, opening the method, bringing in an independent rater. But that\'s the how. <span class="em-note">The what is the thousand.</span>'
       ]
     },
     'appendix-trust': {
