@@ -1,0 +1,428 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(28, 61, 107, 0.05), transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(168, 107, 110, 0.05), transparent 55%),
+    #f4ede0;
+  color: #1e2a44;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --serif: "Iowan Old Style", "Charter", "Apple Garamond", "Palatino Linotype",
+    "Cambria", Georgia, ui-serif, serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code",
+    "Roboto Mono", "Courier New", monospace;
+  --linen: #f4ede0;
+  --linen-deep: #ebe2d0;
+  --slate: #1e2a44;
+  --prussian: #1c3d6b;
+  --rose: #a86b6e;
+  --sage: #6b7a52;
+  --brass: #a8852e;
+}
+
+.masthead {
+  border-bottom: 1px solid rgba(30, 42, 68, 0.2);
+}
+
+.mastheadInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.mastheadName {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.mastheadH4 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.mastheadDivider {
+  color: rgba(30, 42, 68, 0.4);
+}
+
+.mastheadSub {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: rgba(30, 42, 68, 0.65);
+}
+
+.mastheadCoord {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: rgba(30, 42, 68, 0.55);
+}
+
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr 1.05fr;
+    gap: 4rem;
+    padding: 5rem 1.5rem 7rem;
+  }
+}
+
+.heroCopy {
+  max-width: 32rem;
+}
+
+.heroEyebrow {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--prussian);
+  margin: 0 0 1.5rem;
+  font-weight: 500;
+}
+
+.heroHeadline {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5.4vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  margin: 0;
+  color: var(--slate);
+  text-wrap: balance;
+}
+
+.heroHeadline em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.becomeInk {
+  font-style: italic;
+  color: var(--prussian);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.1em;
+}
+
+.heroLede {
+  margin: 1.75rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: rgba(30, 42, 68, 0.82);
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 2.25rem;
+  font-size: 0.95rem;
+  color: var(--slate);
+  text-decoration: none;
+  border-bottom: 1px solid var(--slate);
+  padding-bottom: 4px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.heroCta:hover {
+  color: var(--prussian);
+  border-bottom-color: var(--prussian);
+}
+
+.heroCtaArrow {
+  transition: transform 0.2s;
+}
+
+.heroCta:hover .heroCtaArrow {
+  transform: translateX(3px);
+}
+
+.heroAnnotation {
+  margin: 1.25rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: rgba(30, 42, 68, 0.55);
+  font-style: italic;
+}
+
+.specimenWrap {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+
+.specimenSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pillars {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.pillarsRule {
+  height: 1px;
+  background: rgba(30, 42, 68, 0.18);
+  margin-bottom: 4rem;
+}
+
+.pillarsHeader {
+  max-width: 36rem;
+  margin-bottom: 3rem;
+}
+
+.pillarsKicker {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--prussian);
+  margin: 0 0 0.85rem;
+}
+
+.sectionTitle {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin: 0 0 1rem;
+  font-style: italic;
+}
+
+.sectionSub {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: rgba(30, 42, 68, 0.72);
+  margin: 0;
+}
+
+.pillarGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .pillarGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.specimen {
+  position: relative;
+  padding: 1.75rem 1.75rem 2rem;
+  background: rgba(255, 252, 245, 0.55);
+  border: 1px solid rgba(30, 42, 68, 0.16);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.specimen::before,
+.specimen::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brass);
+  border: 1px solid rgba(30, 42, 68, 0.5);
+}
+
+.specimen::before {
+  top: 8px;
+  left: 8px;
+}
+
+.specimen::after {
+  top: 8px;
+  right: 8px;
+}
+
+.specimenGlyph {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0.5rem auto 0.4rem;
+  color: var(--slate);
+}
+
+.glyph {
+  width: 100%;
+  height: 100%;
+}
+
+.specimenHead {
+  text-align: center;
+}
+
+.specimenTag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--prussian);
+}
+
+.specimenLabel {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-align: center;
+  color: var(--slate);
+}
+
+.specimenBody {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(30, 42, 68, 0.85);
+  margin: 0.5rem 0 0;
+}
+
+.specimenCatalog {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: rgba(30, 42, 68, 0.5);
+  text-align: right;
+  margin: auto 0 0;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(30, 42, 68, 0.18);
+}
+
+.essay {
+  background: var(--linen-deep);
+  padding: 5rem 1.5rem;
+  border-top: 1px solid rgba(30, 42, 68, 0.18);
+  border-bottom: 1px solid rgba(30, 42, 68, 0.18);
+}
+
+.essayInner {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.essayKicker {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--prussian);
+  margin: 0 0 0.85rem;
+}
+
+.essayTitle {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin: 0 0 3rem;
+  font-style: italic;
+}
+
+.essayPara {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+  color: rgba(30, 42, 68, 0.92);
+  text-wrap: pretty;
+}
+
+.essayDropcap {
+  float: left;
+  font-family: var(--serif);
+  font-size: 4rem;
+  line-height: 0.85;
+  padding: 0.4rem 0.6rem 0 0;
+  font-weight: 400;
+  color: var(--rose);
+  font-style: italic;
+}
+
+.colophon {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 3rem;
+}
+
+.colophonInner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@media (min-width: 600px) {
+  .colophonInner {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.colophonName {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.colophonImprint {
+  margin: 0.3rem 0 0;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(30, 42, 68, 0.7);
+  max-width: 26rem;
+}
+
+.colophonCta {
+  font-size: 0.9rem;
+  color: var(--prussian);
+  text-decoration: none;
+  border-bottom: 1px solid var(--prussian);
+  padding-bottom: 3px;
+}
+
+.colophonRule {
+  height: 1px;
+  background: rgba(30, 42, 68, 0.2);
+  margin: 2.5rem 0 1.5rem;
+}
+
+.colophonMeta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(30, 42, 68, 0.5);
+  margin: 0;
+}

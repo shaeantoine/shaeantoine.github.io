@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import { AtlasDesign } from "@/components/designs/atlas/AtlasDesign";
 import { TerrainDesign } from "@/components/designs/terrain/TerrainDesign";
 import { ConstellationDesign } from "@/components/designs/constellation/ConstellationDesign";
+import { FieldGuideDesign } from "@/components/designs/field-guide/FieldGuideDesign";
 
 export type DesignMeta = {
   slug: string;
@@ -21,6 +22,15 @@ export const designs: DesignMeta[] = [
       "Opportunity as territory. Parchment and ink-blue, a map of where students might thrive.",
     swatch: "#e8dcc4",
     Component: AtlasDesign,
+  },
+  {
+    slug: "field-guide",
+    name: "Field Guide",
+    tradition: "Naturalist's plate · Working",
+    pitch:
+      "Learners as specimens. Linen ivory with prussian blue, dusty rose, and sage — a working naturalist's record of how a student grows.",
+    swatch: "#f4ede0",
+    Component: FieldGuideDesign,
   },
   {
     slug: "terrain",
